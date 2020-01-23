@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    
     [Range(1,20)]
     public float speed = 10f;
     
-    
     [Range(1,20)]
     public float jumpVelocity = 2.5f;
-
-    [Range(1,10)]
-    public float jumpMultiplier = 2.0f;
-    
-    [Range(1,10)]
-    public float fallMultiplier = 2.5f;
 
     private Rigidbody2D rb;
     
@@ -36,14 +30,6 @@ public class CharacterMovement : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
             Jump(Vector2.up);
-
-        if (rb.velocity.y < 0)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        } else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;
-        }
 
     }
     

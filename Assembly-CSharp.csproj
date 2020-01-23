@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BetterJump.cs" />
      <Compile Include="Assets\Scripts\CharacterMovement.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Users/victordamato/Documents/UnityProjects/CelesteJump/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -83,6 +84,9 @@
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>/Users/victordamato/Documents/UnityProjects/CelesteJump/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Sprite.Editor">
+ <HintPath>/Users/victordamato/Documents/UnityProjects/CelesteJump/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>/Applications/Unity/Hub/Editor/2019.2.11f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
