@@ -10,6 +10,7 @@ public class CharacterMovement : MonoBehaviour
     
     [Range(1,20)]
     public float jumpVelocity = 11.3f;
+    public bool isJumping;
 
     [Range(1, 20)]
     public float wallSpeed = 3f;
@@ -18,10 +19,13 @@ public class CharacterMovement : MonoBehaviour
     private GroundWallCheck collision;
 
     private Animator anim;
-    
+    private SpriteRenderer _spriteRenderer;
+
+
     // Start is called before the first frame update
     void Awake()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         rb         = GetComponent<Rigidbody2D>();
         collision  = GetComponent<GroundWallCheck>();
         anim       = GetComponent<Animator>(); 
@@ -34,6 +38,7 @@ public class CharacterMovement : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
         Vector2 direction = new Vector2(x, y);
         
+        
         MoveCharacter(direction);
 
         if (rb.velocity.x != 0)
@@ -42,9 +47,9 @@ public class CharacterMovement : MonoBehaviour
             anim.SetBool("isWalking", false);
 
         if(x > 0)
-            GetComponent<SpriteRenderer>().flipX = false;
+            _spriteRenderer.flipX = false;
         if (x < 0)
-            GetComponent<SpriteRenderer>().flipX = true;
+            _spriteRenderer.flipX = true;
 
 
         if (Input.GetButtonDown("Jump"))
@@ -53,15 +58,17 @@ public class CharacterMovement : MonoBehaviour
                 Jump(Vector2.up);
         }
 
-        if (!collision.onGround)
+        if (!collision.onGround) {
             anim.SetBool("isJumping", true);
-        else if(collision.onGround)
+        }
+        else if (collision.onGround) {
             anim.SetBool("isJumping", false);
+        }
 
-        if (collision.onWall && !collision.onGround)
-            WallSlide();
-
-
+        if (collision.onWall && !collision.onGround && rb.velocity.y < 0)
+            if(x != 0)
+                WallSlide();
+        
 
     }
     
@@ -74,6 +81,7 @@ public class CharacterMovement : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpVelocity;
+        
     }
 
     private void WallSlide()
@@ -83,7 +91,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void WallJump()
     {
-
+        if (collision.onWall) {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            Jump(Vector2.up);
+            
+        }
     }
 
 }
