@@ -69,7 +69,28 @@ public class CharacterMovement : MonoBehaviour
             if(x != 0)
                 WallSlide();
         
+        /*
+        if(collision.onWall && Input.GetKey(KeyCode.B))
+            WallGrab();
+        else {
+            rb.simulated = true;
+        }
+        */
+        if (collision.onWall && Input.GetKey(KeyCode.B))
+        {
+            rb.gravityScale = 0;
+            if(x > .2f || x < -.2f)
+               rb.velocity = new Vector2(rb.velocity.x, 0);
 
+            float speedModifier = y > 0 ? .5f : 1;
+
+            rb.velocity = new Vector2(rb.velocity.x, y * (speed * speedModifier));
+        } else
+        {
+            rb.gravityScale = 1;
+        }
+        
+        
     }
     
     void MoveCharacter(Vector2 direction)
@@ -97,5 +118,10 @@ public class CharacterMovement : MonoBehaviour
             
         }
     }
+
+    private void WallGrab() {
+        rb.simulated = false;
+    }
+    
 
 }

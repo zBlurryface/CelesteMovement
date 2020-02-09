@@ -540,7 +540,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1836079224
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -702,6 +702,10 @@ MonoBehaviour:
   wallSide: 0
   bottonSize: 0.85
   sideSize: 0.56
+  bottonOrigin: {x: 0.38, y: 0}
+  bottonOrigin2: {x: -0.27, y: 0}
+  sideOrigin: {x: 0, y: 0.61}
+  sideOrigin2: {x: 0, y: -0.69}
 --- !u!1 &1926648388
 GameObject:
   m_ObjectHideFlags: 0

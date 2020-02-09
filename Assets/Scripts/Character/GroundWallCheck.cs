@@ -23,7 +23,17 @@ public class GroundWallCheck : MonoBehaviour
     [Header("Collision")]
     public float bottonSize;
     public float sideSize;
+
+    [Space] 
     
+    [Header("Originds")]
+    public Vector2 bottonOrigin;
+    public Vector2 bottonOrigin2;
+    
+    public Vector2 sideOrigin;
+    public Vector2 sideOrigin2;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,22 +43,19 @@ public class GroundWallCheck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        onGround = Physics2D.OverlapBox((Vector2)transform.position + bottomOffset, bottonSize, groundLayer);
-        onWall = Physics2D.OverlapBox((Vector2)transform.position + rightOffset, sideSize, groundLayer)
-            || Physics2D.OverlapBox((Vector2)transform.position + leftOffset, sideSize, groundLayer);
-
-        onRightWall = Physics2D.OverlapBox((Vector2)transform.position + rightOffset, sideSize, groundLayer);
-        onLeftWall = Physics2D.OverlapBox((Vector2)transform.position + leftOffset, sideSize, groundLayer);
-        */
-        
-        onGround = Physics2D.Raycast( transform.position, Vector2.down, bottonSize, groundLayer);
-        onWall = Physics2D.Raycast( transform.position, Vector2.right, sideSize, groundLayer) 
-                 || Physics2D.Raycast( transform.position, Vector2.left, sideSize, groundLayer);
+        var charPosition = (Vector2)transform.position;
+        onGround = Physics2D.Raycast(charPosition + bottonOrigin, Vector2.down, bottonSize, groundLayer) 
+                   || Physics2D.Raycast( charPosition + bottonOrigin2, Vector2.down, bottonSize, groundLayer);
+        onWall = Physics2D.Raycast(charPosition +  sideOrigin, Vector2.right, sideSize, groundLayer) 
+                   || Physics2D.Raycast(charPosition +  sideOrigin2, Vector2.right, sideSize, groundLayer) 
+                   || Physics2D.Raycast(charPosition +  sideOrigin, Vector2.left, sideSize, groundLayer) 
+                   || Physics2D.Raycast(charPosition +  sideOrigin2, Vector2.left, sideSize, groundLayer);
 
         
-        onRightWall = Physics2D.Raycast(transform.position, Vector2.right, sideSize, groundLayer);
-        onLeftWall = Physics2D.Raycast(transform.position, Vector2.left, sideSize, groundLayer);
+        onRightWall = Physics2D.Raycast(charPosition + sideOrigin, Vector2.right, sideSize, groundLayer)
+                      || Physics2D.Raycast(charPosition + sideOrigin2, Vector2.right, sideSize, groundLayer);
+        onLeftWall = Physics2D.Raycast(charPosition +  sideOrigin, Vector2.left, sideSize, groundLayer) 
+                      || Physics2D.Raycast(charPosition +  sideOrigin2, Vector2.left, sideSize, groundLayer);
 
         
         
@@ -59,9 +66,15 @@ public class GroundWallCheck : MonoBehaviour
     {
         Gizmos.color = Color.red;
         
-        Gizmos.DrawRay((Vector2)transform.position, Vector3.down * bottonSize);
-        Gizmos.DrawRay((Vector2)transform.position, Vector3.right * sideSize);
-        Gizmos.DrawRay((Vector2)transform.position, Vector3.left * sideSize);
+        Gizmos.DrawRay((Vector2)transform.position + bottonOrigin, Vector3.down * bottonSize);
+        Gizmos.DrawRay((Vector2)transform.position + bottonOrigin2, Vector3.down * bottonSize);
+
+        Gizmos.DrawRay((Vector2)transform.position + sideOrigin, Vector3.right * sideSize);
+        Gizmos.DrawRay((Vector2)transform.position + sideOrigin2, Vector3.right * sideSize);
+
+        Gizmos.DrawRay((Vector2)transform.position + sideOrigin, Vector3.left * sideSize);
+        Gizmos.DrawRay((Vector2)transform.position + sideOrigin2, Vector3.left * sideSize);
+
     }
 
 
