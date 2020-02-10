@@ -69,13 +69,7 @@ public class CharacterMovement : MonoBehaviour
             if(x != 0)
                 WallSlide();
         
-        /*
-        if(collision.onWall && Input.GetKey(KeyCode.B))
-            WallGrab();
-        else {
-            rb.simulated = true;
-        }
-        */
+
         if (collision.onWall && Input.GetKey(KeyCode.B))
         {
             rb.gravityScale = 0;
@@ -107,6 +101,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void WallSlide()
     {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity = new Vector2(rb.velocity.x, -wallSpeed);
     }
 
