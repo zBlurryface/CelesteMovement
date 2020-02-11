@@ -117,6 +117,14 @@ public class CharacterMovement : MonoBehaviour
     private void WallGrab() {
         rb.simulated = false;
     }
-    
 
+    private void OnTriggerEnter2D(Collider2D colisor)
+    {
+        if (colisor.gameObject.CompareTag("Reset Pulo"))
+        {
+            speed *= 2;
+            Destroy(colisor.gameObject);
+        }
+
+    }
 }
