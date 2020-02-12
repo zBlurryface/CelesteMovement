@@ -56,6 +56,8 @@ public class CharacterMovement : MonoBehaviour
         {
             if(collision.onGround)
                 Jump(Vector2.up);
+            if (collision.onWall && !collision.onGround)
+                WallJump();
         }
 
         if (!collision.onGround) {
@@ -70,7 +72,7 @@ public class CharacterMovement : MonoBehaviour
                 WallSlide();
         
 
-        if (collision.onWall && Input.GetKey(KeyCode.B))
+        if (collision.onWall && Input.GetButton("Hold"))
         {
             rb.gravityScale = 0;
             if(x > .2f || x < -.2f)
@@ -107,11 +109,11 @@ public class CharacterMovement : MonoBehaviour
 
     private void WallJump()
     {
-        if (collision.onWall) {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            Jump(Vector2.up);
-            
-        }
+        Vector2 wallDir = collision.onRightWall ? Vector2.left : Vector2.right;
+
+        Jump((Vector2.up / 1.5f + wallDir / 1.5f));
+
+
     }
 
     private void WallGrab() {
