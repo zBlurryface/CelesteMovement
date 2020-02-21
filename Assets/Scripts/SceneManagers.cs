@@ -7,11 +7,11 @@ public class SceneManagers : MonoBehaviour
 {
 
     public void goJogo() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void goMenu() {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
     
     
