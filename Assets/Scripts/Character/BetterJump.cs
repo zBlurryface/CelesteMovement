@@ -8,7 +8,7 @@ public class BetterJump : MonoBehaviour
     public float jumpMultiplier = 2.0f;
     
     [Range(1,10)]
-    public float fallMultiplier = 2.5f;
+    public float fallMultiplier = 3.5f;
 
     private Rigidbody2D rb;
     
@@ -28,6 +28,12 @@ public class BetterJump : MonoBehaviour
         } else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (jumpMultiplier - 1) * Time.deltaTime;
+        }
+
+        if (rb.velocity.y < -12f)
+            fallMultiplier = 0;
+        else {
+            fallMultiplier = 3.5f;
         }
 
     }
